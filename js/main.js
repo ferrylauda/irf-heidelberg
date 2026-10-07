@@ -8,12 +8,14 @@
 
   /* ---------- Language ---------- */
 
-  function storageGet() {
-    try { return localStorage.getItem(STORAGE_KEY); } catch (e) { return null; }
+  function storageGetKey(key) {
+    try { return localStorage.getItem(key); } catch (e) { return null; }
   }
-  function storageSet(value) {
-    try { localStorage.setItem(STORAGE_KEY, value); } catch (e) { /* ignore */ }
+  function storageSetKey(key, value) {
+    try { localStorage.setItem(key, value); } catch (e) { /* ignore */ }
   }
+  function storageGet() { return storageGetKey(STORAGE_KEY); }
+  function storageSet(value) { storageSetKey(STORAGE_KEY, value); }
 
   function detectLanguage() {
     var fromUrl = new URLSearchParams(window.location.search).get("lang");
@@ -46,6 +48,79 @@
     document.querySelectorAll(".lang-switch button").forEach(function (btn) {
       btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === lang ? "true" : "false");
     });
+
+    renderNews(lang);
+  }
+
+  /* ---------- News & breaking-news pop-up (data in js/news.js) ---------- */
+
+  var NOTICE_KEY = "irf-notice-closed";
+
+  function pick(texts, lang) {
+    if (!texts) return "";
+    return texts[lang] || texts.en || "";
+  }
+
+  function formatDate(iso, lang) {
+    var d = new Date(iso + "T12:00:00");
+    if (isNaN(d)) return iso;
+    var locale = { en: "en-GB", id: "id-ID", de: "de-DE" }[lang] || lang;
+    return d.toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
+  }
+
+  function newsItem(title, text, meta, breaking) {
+    var li = document.createElement("li");
+    li.className = "news-item" + (breaking ? " is-breaking" : "");
+    var m = document.createElement("p");
+    m.className = "news-meta";
+    m.textContent = meta;
+    var h = document.createElement("h3");
+    h.textContent = title;
+    var p = document.createElement("p");
+    p.textContent = text;
+    li.appendChild(m);
+    li.appendChild(h);
+    li.appendChild(p);
+    return li;
+  }
+
+  function renderNews(lang) {
+    var news = window.NEWS || {};
+    var dict = (window.I18N && window.I18N[lang]) || {};
+    var breaking = news.breaking && news.breaking.active ? news.breaking : null;
+
+    var list = document.getElementById("news-list");
+    if (list) {
+      list.innerHTML = "";
+      if (breaking) {
+        list.appendChild(newsItem(pick(breaking.title, lang), pick(breaking.text, lang),
+          dict["notice.label"] || window.I18N.en["notice.label"], true));
+      }
+      (news.items || []).forEach(function (item) {
+        list.appendChild(newsItem(pick(item.title, lang), pick(item.text, lang), formatDate(item.date, lang), false));
+      });
+      var empty = document.getElementById("news-empty");
+      if (empty) empty.hidden = list.children.length > 0;
+    }
+
+    var dialog = document.getElementById("notice-dialog");
+    if (dialog && breaking) {
+      document.getElementById("notice-title").textContent = pick(breaking.title, lang);
+      document.getElementById("notice-text").textContent = pick(breaking.text, lang);
+    }
+  }
+
+  function showBreakingNews() {
+    var news = window.NEWS || {};
+    var breaking = news.breaking;
+    var dialog = document.getElementById("notice-dialog");
+    if (!dialog || !breaking || !breaking.active || typeof dialog.showModal !== "function") return;
+    if (storageGetKey(NOTICE_KEY) === String(breaking.id)) return;
+
+    dialog.addEventListener("close", function () { storageSetKey(NOTICE_KEY, String(breaking.id)); });
+    // Clicking the dark backdrop also closes the pop-up
+    dialog.addEventListener("click", function (e) { if (e.target === dialog) dialog.close(); });
+    dialog.showModal();
   }
 
   document.querySelectorAll(".lang-switch button").forEach(function (btn) {
@@ -57,6 +132,7 @@
   });
 
   applyLanguage(detectLanguage());
+  showBreakingNews();
 
   /* ---------- Header & mobile menu ---------- */
 

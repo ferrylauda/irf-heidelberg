@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>International Reformed Fellowship in Heidelberg</title>
-  <meta name="description" content="International Reformed Fellowship in Heidelberg – a Reformed, Bible-centred Christian community from many nations. Sunday worship in Heidelberg, Germany.">
-  <meta property="og:title" content="International Reformed Fellowship in Heidelberg">
-  <meta property="og:description" content="A Reformed Christian community from many nations, gathering every Sunday in Heidelberg.">
+  <title>International Reformed Fellowship Heidelberg</title>
+  <meta name="description" content="International Reformed Fellowship Heidelberg – a Reformed, Bible-centred Christian community from many nations, holding to the Belgic Confession, the Heidelberg Catechism, the Westminster Confession of Faith and covenant theology. Sunday worship, Sunday School and prayer meeting in the Heidelberg area, Germany.">
+  <meta property="og:title" content="International Reformed Fellowship Heidelberg">
+  <meta property="og:description" content="A Reformed Christian community from many nations, gathering every Sunday in the Heidelberg area.">
   <meta property="og:url" content="https://irf-heidelberg.org/">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://irf-heidelberg.org/">
@@ -31,6 +31,7 @@
       <nav class="main-nav" id="main-nav" aria-label="Main">
         <ul>
           <li><a href="#home" data-i18n="nav.home">Home</a></li>
+          <li><a href="#news" data-i18n="nav.news">News</a></li>
           <li><a href="#about" data-i18n="nav.about">About us</a></li>
           <li><a href="#worship" data-i18n="nav.worship">Sunday Service</a></li>
           <li><a href="#confession" data-i18n="nav.confession">Our Confession</a></li>
@@ -58,16 +59,30 @@
     <section class="hero" id="home">
       <div class="container hero-inner">
         <p class="eyebrow eyebrow-light" data-i18n="hero.eyebrow">Welcome to the</p>
-        <h1 class="hero-title">International Reformed Fellowship<span> in Heidelberg</span></h1>
-        <p class="hero-tagline" data-i18n="hero.tagline">A Reformed, Bible-centred Christian community from many nations, gathering in Heidelberg to worship the triune God together.</p>
+        <h1 class="hero-title">International Reformed Fellowship<span>Heidelberg</span></h1>
+        <p class="hero-tagline" data-i18n="hero.tagline">A Reformed, Bible-centred Christian community from many nations, gathering in the Heidelberg area to worship the triune God together.</p>
         <div class="hero-actions">
           <a class="btn btn-gold" href="#worship" data-i18n="hero.cta1">Join us on Sunday</a>
           <a class="btn btn-ghost" href="#about" data-i18n="hero.cta2">Learn more</a>
         </div>
         <figure class="hero-verse">
-          <blockquote data-i18n="hero.verse">“After this I looked, and behold, a great multitude that no one could number, from every nation, from all tribes and peoples and languages, standing before the throne and before the Lamb.”</blockquote>
-          <figcaption data-i18n="hero.verseRef">Revelation 7:9</figcaption>
+          <blockquote data-i18n="hero.verse">“Go therefore and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit, teaching them to observe all that I have commanded you. And behold, I am with you always, to the end of the age.”</blockquote>
+          <figcaption data-i18n="hero.verseRef">Matthew 28:19–20</figcaption>
         </figure>
+      </div>
+    </section>
+
+    <!-- ============ NEWS ============
+         The announcements and the breaking-news pop-up are edited in js/news.js -->
+    <section class="section section-tint" id="news">
+      <div class="container narrow center">
+        <p class="eyebrow" data-i18n="news.eyebrow">News</p>
+        <h2 class="section-title" data-i18n="news.title">Announcements</h2>
+        <div class="divider" aria-hidden="true"><span></span></div>
+      </div>
+      <div class="container">
+        <ul class="news-list" id="news-list"></ul>
+        <p class="news-empty" id="news-empty" data-i18n="news.empty" hidden>There are no announcements at the moment.</p>
       </div>
     </section>
 
@@ -79,7 +94,7 @@
         <div class="divider" aria-hidden="true"><span></span></div>
       </div>
       <div class="container narrow prose">
-        <p data-i18n="about.p1">The International Reformed Fellowship in Heidelberg is a community of Christians – students, families and professionals – from many countries who have made Heidelberg their home, whether for a season or for a lifetime.</p>
+        <p data-i18n="about.p1">The International Reformed Fellowship Heidelberg is a community of Christians – students, families and professionals – from many countries who have made Heidelberg their home, whether for a season or for a lifetime.</p>
         <p data-i18n="about.p2">We gather to hear God’s Word faithfully preached, to worship Him in spirit and in truth, and to care for one another in love. Our faith stands in the tradition of the Protestant Reformation – a heritage closely tied to this very city, where the Heidelberg Catechism was written in 1563.</p>
         <p data-i18n="about.p3">Whether you have followed Christ for many years, are new to the faith, or are simply curious – you are warmly welcome.</p>
       </div>
@@ -110,7 +125,7 @@
         <p class="eyebrow" data-i18n="worship.eyebrow">Activities</p>
         <h2 class="section-title" data-i18n="worship.title">Sunday Service</h2>
         <div class="divider" aria-hidden="true"><span></span></div>
-        <p class="lead" data-i18n="worship.intro">Our main gathering is the Sunday worship service. Further activities will be announced here soon.</p>
+        <p class="lead" data-i18n="worship.intro">Every Sunday we gather for worship. On the same day we also have Sunday School for children and a prayer meeting.</p>
       </div>
       <div class="container">
         <div class="service-card">
@@ -140,8 +155,25 @@
           </dl>
           <div class="service-expect">
             <h3 data-i18n="worship.expectTitle">What to expect</h3>
-            <p data-i18n="worship.expectText">Our service includes congregational singing, Scripture reading, prayer and the preaching of God’s Word. Afterwards we enjoy coffee and conversation together. Come as you are – no registration needed.</p>
+            <p data-i18n="worship.expectText">Our service includes congregational singing, Scripture reading, prayer and the preaching of God’s Word. Afterwards we enjoy coffee and conversation together. Visitors are always welcome – no registration is needed.</p>
           </div>
+        </div>
+
+        <div class="activities">
+          <article class="activity">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="6" r="2.5"/><circle cx="16.5" cy="8.5" r="2"/><path d="M4 20v-4.5A4 4 0 0 1 8 11.5a4 4 0 0 1 4 4V20M13.5 20v-3a3 3 0 0 1 6 0v3"/></svg>
+            <h3 data-i18n="worship.schoolTitle">Sunday School</h3>
+            <!-- TODO: confirm when Sunday School takes place -->
+            <p class="activity-meta" data-i18n="worship.schoolMeta">For children under 12</p>
+            <p data-i18n="worship.schoolText">During the service, children under 12 learn the stories and truths of the Bible in classes suited to their age.</p>
+          </article>
+          <article class="activity">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5v13.5"/><path d="M12 3.5c-1.6 1.3-2.8 4-3 6.8L8.5 13 4 17.5 7 21l5-4"/><path d="M12 3.5c1.6 1.3 2.8 4 3 6.8l.5 2.7 4.5 4.5L17 21l-5-4"/><path d="M5.6 15.9 8.6 19.4M18.4 15.9l-3 3.5"/></svg>
+            <h3 data-i18n="worship.prayerTitle">Prayer Meeting</h3>
+            <!-- TODO: confirm the day and time of the prayer meeting -->
+            <p class="activity-meta" data-i18n="worship.prayerMeta">Sundays · 14:00</p>
+            <p data-i18n="worship.prayerText">We come together before the throne of grace to pray for one another, for the church and for the world.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -188,21 +220,29 @@
             <h3 data-i18n="confession.creedsTitle">Ecumenical Creeds</h3>
             <p data-i18n="confession.creedsText">With the Church of all ages we confess:</p>
             <ul class="doc-list">
-              <li><strong data-i18n="confession.apostles">Apostles’ Creed</strong></li>
               <li><strong data-i18n="confession.nicene">Nicene Creed</strong> <span>(325 / 381)</span></li>
-              <li><strong data-i18n="confession.athanasian">Athanasian Creed</strong></li>
+              <li><strong data-i18n="confession.chalcedon">Chalcedonian Definition</strong> <span>(451)</span></li>
+              <li><strong data-i18n="confession.apostles">Apostles’ Creed</strong></li>
             </ul>
           </article>
           <article class="confession-block">
-            <h3 data-i18n="confession.formsTitle">Three Forms of Unity</h3>
+            <h3 data-i18n="confession.reformedTitle">Reformed Confessions</h3>
             <p data-i18n="confession.formsText">Together with Reformed churches worldwide, we hold to:</p>
             <ul class="doc-list">
               <li><strong data-i18n="confession.belgic">Belgic Confession</strong> <span>(1561)</span><br><em data-i18n="confession.belgicText">A clear summary of the doctrines of the Christian faith.</em></li>
-              <li><strong data-i18n="confession.heidelberg">Heidelberg Catechism</strong> <span>(1563)</span><br><em data-i18n="confession.heidelbergText">Written here in Heidelberg – a warm, personal teaching of the gospel in 129 questions and answers.</em></li>
-              <li><strong data-i18n="confession.dort">Canons of Dort</strong> <span>(1618–1619)</span><br><em data-i18n="confession.dortText">The Reformed teaching on God’s sovereign grace in salvation.</em></li>
+              <li><strong data-i18n="confession.heidelberg">Heidelberg Catechism</strong> <span>(1563)</span><br><em data-i18n="confession.heidelbergText">Written in Heidelberg – a warm, personal teaching of the gospel in 129 questions and answers.</em></li>
+              <li><strong data-i18n="confession.wcf">Westminster Confession of Faith</strong> <span>(1646)</span><br><em data-i18n="confession.wcfText">A careful and comprehensive summary of the whole system of biblical doctrine.</em></li>
             </ul>
           </article>
         </div>
+
+        <figure class="covenant">
+          <h3 data-i18n="confession.covenantTitle">Covenant Theology</h3>
+          <div class="divider" aria-hidden="true"><span></span></div>
+          <p data-i18n="confession.covenantP1">We believe that the infinite, eternal and holy God has condescended to humankind and established fellowship with His people by way of covenant.</p>
+          <p data-i18n="confession.covenantP2">Out of His mere good pleasure, God from all eternity chose a people for Himself and entered into a covenant of grace, to deliver them out of sin and misery and to bring them into salvation by a Redeemer – Jesus Christ, His only begotten Son.</p>
+          <figcaption data-i18n="confession.covenantSrc">cf. Westminster Confession 7 · Shorter Catechism Q. 20</figcaption>
+        </figure>
 
         <h3 class="solas-title" data-i18n="confession.solasTitle">The Five Solas of the Reformation</h3>
         <ul class="solas">
@@ -263,6 +303,13 @@
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
           <a href="mailto:info@irf-heidelberg.org">info@irf-heidelberg.org</a>
         </p>
+        <!-- TODO: WhatsApp contact (Hendry). Put the number in the wa.me link in international format
+             without "+" or spaces (e.g. 4915112345678), then remove the comment markers around this block.
+        <p class="contact-email">
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.5A8.5 8.5 0 0 1 7.6 19L3 20.5l1.5-4.4A8.5 8.5 0 1 1 20 11.5z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.5-2-1-1 1c-1-.5-2.5-2-3-3l1-1-1-2z"/></svg>
+          <a href="https://wa.me/49XXXXXXXXXXX" target="_blank" rel="noopener"><span data-i18n="contact.whatsapp">WhatsApp</span>: Hendry</a>
+        </p>
+        -->
         <a class="btn btn-gold" href="mailto:info@irf-heidelberg.org" data-i18n="contact.button">Send us an email</a>
       </div>
     </section>
@@ -272,7 +319,7 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <p class="footer-name">International Reformed Fellowship in Heidelberg</p>
+        <p class="footer-name">International Reformed Fellowship Heidelberg</p>
         <p class="footer-motto">Soli Deo Gloria</p>
       </div>
       <p class="footer-links">
@@ -283,7 +330,22 @@
     </div>
   </footer>
 
+  <!-- Breaking news pop-up (filled from js/news.js) -->
+  <dialog class="notice-dialog" id="notice-dialog" aria-labelledby="notice-title">
+    <div class="notice-head">
+      <p class="eyebrow eyebrow-light" data-i18n="notice.label">Important notice</p>
+      <h2 id="notice-title"></h2>
+    </div>
+    <div class="notice-body">
+      <p id="notice-text"></p>
+      <form method="dialog">
+        <button class="btn btn-gold" type="submit" data-i18n="notice.close">OK, got it</button>
+      </form>
+    </div>
+  </dialog>
+
   <script src="js/i18n.js"></script>
+  <script src="js/news.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

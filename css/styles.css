@@ -99,7 +99,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .brand-sub { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; opacity: .75; }
 
 .main-nav { margin-left: auto; }
-.main-nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+.main-nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
 .main-nav a {
   color: inherit;
   text-decoration: none;
@@ -110,6 +110,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
   transition: border-color .2s, color .2s;
 }
 .main-nav a:hover, .main-nav a.active { border-bottom-color: var(--gold); color: inherit; }
+.main-nav li { white-space: nowrap; }
 
 .header-tools { display: flex; align-items: center; gap: 14px; }
 
@@ -242,6 +243,61 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .service-expect h3 { color: #fff; font-size: 1.5rem; }
 .service-expect p { margin: 0; opacity: .9; }
 
+.activities { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.activity {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 30px 32px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 18px;
+}
+.activity .icon { grid-row: span 3; color: var(--gold); width: 32px; height: 32px; margin-top: 4px; }
+.activity h3 { font-size: 1.35rem; margin-bottom: .15em; }
+.activity-meta { margin: 0 0 .6em; font-size: .74rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--navy); }
+.activity p:last-child { margin: 0; color: var(--muted); font-size: .98rem; }
+
+/* ---------- News ---------- */
+.news-list { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; display: grid; gap: 18px; }
+.news-item {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 24px 28px;
+}
+.news-item.is-breaking { border-left-color: var(--navy); box-shadow: var(--shadow); }
+.news-meta { margin: 0 0 .3em; font-size: .74rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.news-item.is-breaking .news-meta { color: var(--navy); }
+.news-item h3 { font-size: 1.3rem; margin-bottom: .3em; }
+.news-item p:last-child { margin: 0; white-space: pre-line; }
+.news-empty { text-align: center; color: var(--muted); margin: 0; }
+
+/* Breaking news pop-up */
+.notice-dialog {
+  width: min(520px, calc(100% - 32px));
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 24px 60px rgba(13, 26, 45, .35);
+}
+.notice-dialog::backdrop { background: rgba(13, 26, 45, .55); }
+.notice-head {
+  padding: 26px 32px 22px;
+  color: #fff;
+  background:
+    radial-gradient(ellipse at 90% 0%, rgba(180, 138, 78, .25), transparent 60%),
+    linear-gradient(160deg, var(--navy), var(--navy-deep));
+}
+.notice-head .eyebrow { margin-bottom: .5em; }
+.notice-head h2 { color: #fff; font-size: 1.6rem; margin: 0; }
+.notice-body { padding: 24px 32px 28px; }
+.notice-body p { margin: 0 0 1.4em; white-space: pre-line; }
+.notice-body .btn:focus-visible { outline: 2px solid var(--gold-soft); outline-offset: 3px; }
+
 /* ---------- Gallery (for later) ---------- */
 .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
 .gallery img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
@@ -333,6 +389,12 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .legal address { font-style: normal; }
 .back-link { display: inline-block; margin-top: 2.5em; }
 
+/* ---------- Covenant theology ---------- */
+.covenant { max-width: 760px; margin: 72px auto 0; text-align: center; }
+.covenant h3 { font-size: 1.5rem; }
+.covenant p { margin: 0 0 1em; }
+.covenant figcaption { font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+
 /* ---------- Reveal on scroll ---------- */
 .reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.visible { opacity: 1; transform: none; }
@@ -344,7 +406,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 1000px) {
+@media (max-width: 1180px) {
   .main-nav {
     position: fixed;
     top: var(--header-h);
@@ -367,6 +429,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
   .nav-toggle { display: block; }
 
   .service-card, .confession-grid, .location-grid { grid-template-columns: 1fr; }
+  .activities { grid-template-columns: 1fr; }
   .solas { grid-template-columns: repeat(2, 1fr); }
   .solas li:last-child { grid-column: span 2; }
 }
@@ -379,6 +442,9 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
   .values { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
   .service-facts { grid-template-columns: 1fr; padding: 32px 24px; gap: 22px; }
   .service-expect { padding: 32px 24px; }
+  .activity { padding: 26px 22px; }
+  .news-item { padding: 22px; }
+  .notice-head, .notice-body { padding-left: 22px; padding-right: 22px; }
   .catechism-quote { padding: 40px 22px 30px; }
   .confession-block { padding: 28px 22px; }
   .hero::after { opacity: .5; }

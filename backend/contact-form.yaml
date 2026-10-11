@@ -1,0 +1,273 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  Contact form backend for irf-heidelberg.org.
+  HTTP API (throttled, CORS) -> Lambda -> Amazon SES -> private mailbox.
+  All resources in eu-central-1. Nothing is stored; the message is only e-mailed.
+
+Parameters:
+  RecipientEmail:
+    Type: String
+    Description: Private address that receives the messages (never shown on the website).
+  SenderEmail:
+    Type: String
+    Description: >
+      "From" address. Either a verified single address (e.g. the same as RecipientEmail)
+      or an address at SenderDomain, e.g. no-reply@irf-heidelberg.org.
+  AllowedOrigins:
+    Type: CommaDelimitedList
+    Description: Website origins allowed to call the API (CORS).
+    Default: "http://www.irf-heidelberg.org.s3-website.eu-central-1.amazonaws.com,http://irf-heidelberg.org,https://irf-heidelberg.org,http://www.irf-heidelberg.org,https://www.irf-heidelberg.org"
+  SenderDomain:
+    Type: String
+    Default: ""
+    Description: >
+      Optional. Our own domain (e.g. irf-heidelberg.org). If set, SES verifies the
+      whole domain with DKIM, a custom MAIL FROM subdomain (SPF) and a DMARC record,
+      all written into the Route 53 zone HostedZoneId. Then SenderEmail can be any
+      address at this domain, without a mailbox.
+  HostedZoneId:
+    Type: String
+    Default: ""
+    Description: Route 53 hosted zone of SenderDomain (only used if SenderDomain is set).
+
+Conditions:
+  DifferentSender: !And
+    - !Not [!Equals [!Ref RecipientEmail, !Ref SenderEmail]]
+    - !Equals [!Ref SenderDomain, ""]
+  HasSenderDomain: !Not [!Equals [!Ref SenderDomain, ""]]
+
+Resources:
+  # SES sends a verification link to this address after the first deploy.
+  # In the SES sandbox this is enough: we only ever send to our own verified address.
+  RecipientIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: !Ref RecipientEmail
+
+  # Only needed when "From" differs from the recipient (also gets a verification link).
+  SenderIdentity:
+    Type: AWS::SES::EmailIdentity
+    Condition: DifferentSender
+    Properties:
+      EmailIdentity: !Ref SenderEmail
+
+  # Sending from our own domain: verified by DKIM, so mail is not marked as spoofed.
+  SenderDomainIdentity:
+    Type: AWS::SES::EmailIdentity
+    Condition: HasSenderDomain
+    Properties:
+      EmailIdentity: !Ref SenderDomain
+      DkimSigningAttributes:
+        NextSigningKeyLength: RSA_2048_BIT
+      MailFromAttributes:
+        MailFromDomain: !Sub "mail.${SenderDomain}"
+        BehaviorOnMxFailure: USE_DEFAULT_VALUE
+
+  SenderDomainRecords:
+    Type: AWS::Route53::RecordSetGroup
+    Condition: HasSenderDomain
+    Properties:
+      HostedZoneId: !Ref HostedZoneId
+      Comment: SES sending for the contact form (DKIM, MAIL FROM/SPF, DMARC)
+      RecordSets:
+        - Name: !GetAtt SenderDomainIdentity.DkimDNSTokenName1
+          Type: CNAME
+          TTL: "1800"
+          ResourceRecords: [!GetAtt SenderDomainIdentity.DkimDNSTokenValue1]
+        - Name: !GetAtt SenderDomainIdentity.DkimDNSTokenName2
+          Type: CNAME
+          TTL: "1800"
+          ResourceRecords: [!GetAtt SenderDomainIdentity.DkimDNSTokenValue2]
+        - Name: !GetAtt SenderDomainIdentity.DkimDNSTokenName3
+          Type: CNAME
+          TTL: "1800"
+          ResourceRecords: [!GetAtt SenderDomainIdentity.DkimDNSTokenValue3]
+        # Custom MAIL FROM: bounces go to SES, SPF passes for our domain.
+        - Name: !Sub "mail.${SenderDomain}"
+          Type: MX
+          TTL: "1800"
+          ResourceRecords: [!Sub "10 feedback-smtp.${AWS::Region}.amazonses.com"]
+        - Name: !Sub "mail.${SenderDomain}"
+          Type: TXT
+          TTL: "1800"
+          ResourceRecords: ['"v=spf1 include:amazonses.com ~all"']
+        # DMARC in monitoring mode (p=none). Tighten to quarantine once all mail
+        # for the domain (e.g. a future info@ mailbox) is authenticated.
+        - Name: !Sub "_dmarc.${SenderDomain}"
+          Type: TXT
+          TTL: "1800"
+          ResourceRecords: ['"v=DMARC1; p=none"']
+
+  FunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { Service: lambda.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: send-contact-mail
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action: ses:SendEmail
+                Resource: !Sub "arn:aws:ses:${AWS::Region}:${AWS::AccountId}:identity/*"
+                Condition:
+                  StringEquals:
+                    ses:FromAddress: !Ref SenderEmail
+
+  # Logs contain only errors, never the message text. Keep them short-lived.
+  FunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub "/aws/lambda/${AWS::StackName}"
+      RetentionInDays: 14
+
+  Function:
+    Type: AWS::Lambda::Function
+    DependsOn: FunctionLogGroup
+    Properties:
+      FunctionName: !Ref AWS::StackName
+      Runtime: nodejs22.x
+      Handler: index.handler
+      Role: !GetAtt FunctionRole.Arn
+      MemorySize: 128
+      Timeout: 10
+      Environment:
+        Variables:
+          TO_ADDRESS: !Ref RecipientEmail
+          FROM_ADDRESS: !Ref SenderEmail
+      Code:
+        # Keep this file ASCII-only: write umlauts etc. as JS escapes (u-umlaut = \u00fc),
+        # the AWS CLI on Windows may read templates as cp1252 and garble them.
+        ZipFile: |
+          const { SESv2Client, SendEmailCommand } = require("@aws-sdk/client-sesv2");
+          const ses = new SESv2Client({});
+          const SUBJECTS = {
+            visit: "Visit / Besuch / Ingin berkunjung",
+            question: "General question / Allgemeine Frage / Pertanyaan umum",
+            prayer: "Prayer request / Gebetsanliegen / Pokok doa"
+          };
+          const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+          const reply = (statusCode, body) => ({
+            statusCode,
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(body)
+          });
+          const oneLine = (s) => String(s).replace(/[\r\n\t]+/g, " ").trim();
+
+          exports.handler = async (event) => {
+            let data;
+            try {
+              const raw = event.isBase64Encoded
+                ? Buffer.from(event.body || "", "base64").toString("utf8")
+                : event.body || "";
+              data = JSON.parse(raw);
+            } catch {
+              return reply(400, { ok: false, error: "bad_request" });
+            }
+            if (!data || typeof data !== "object") return reply(400, { ok: false, error: "bad_request" });
+
+            // Honeypot: real visitors never see this field. Pretend success for bots.
+            if (data.website) return reply(200, { ok: true });
+
+            const name = oneLine(data.name || "");
+            const email = oneLine(data.email || "");
+            const subject = String(data.subject || "");
+            const message = String(data.message || "").trim();
+            const lang = /^(id|de|en)$/.test(data.lang) ? data.lang : "?";
+
+            const valid =
+              name.length >= 1 && name.length <= 100 &&
+              EMAIL.test(email) && email.length <= 200 &&
+              Object.hasOwn(SUBJECTS, subject) &&
+              message.length >= 10 && message.length <= 5000 &&
+              data.consent === true;
+            if (!valid) return reply(400, { ok: false, error: "invalid" });
+
+            const text = [
+              `Name:    ${name}`,
+              `E-Mail:  ${email}`,
+              `Subject: ${SUBJECTS[subject]}`,
+              `Lang:    ${lang}`,
+              "",
+              message,
+              "",
+              "--",
+              "Sent via the contact form on irf-heidelberg.org.",
+              "Replying goes directly to the sender (Reply-To)."
+            ].join("\n");
+
+            try {
+              await ses.send(new SendEmailCommand({
+                FromEmailAddress: `Website IRF Heidelberg <${process.env.FROM_ADDRESS}>`,
+                Destination: { ToAddresses: [process.env.TO_ADDRESS] },
+                ReplyToAddresses: [email],
+                Content: {
+                  Simple: {
+                    Subject: { Data: `[Website] ${SUBJECTS[subject]} \u2013 ${name}`, Charset: "UTF-8" },
+                    Body: { Text: { Data: text, Charset: "UTF-8" } }
+                  }
+                }
+              }));
+            } catch (err) {
+              console.error("SES send failed:", err.name, err.message);
+              return reply(502, { ok: false, error: "send_failed" });
+            }
+            return reply(200, { ok: true });
+          };
+
+  Api:
+    Type: AWS::ApiGatewayV2::Api
+    Properties:
+      Name: !Ref AWS::StackName
+      ProtocolType: HTTP
+      CorsConfiguration:
+        AllowOrigins: !Ref AllowedOrigins
+        AllowMethods: [POST]
+        AllowHeaders: [content-type]
+        MaxAge: 3600
+
+  Integration:
+    Type: AWS::ApiGatewayV2::Integration
+    Properties:
+      ApiId: !Ref Api
+      IntegrationType: AWS_PROXY
+      IntegrationUri: !GetAtt Function.Arn
+      PayloadFormatVersion: "2.0"
+
+  Route:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref Api
+      RouteKey: POST /contact
+      Target: !Sub "integrations/${Integration}"
+
+  # Throttling caps abuse (and cost): a church contact form needs very little.
+  Stage:
+    Type: AWS::ApiGatewayV2::Stage
+    Properties:
+      ApiId: !Ref Api
+      StageName: $default
+      AutoDeploy: true
+      DefaultRouteSettings:
+        ThrottlingRateLimit: 1
+        ThrottlingBurstLimit: 5
+
+  InvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !Ref Function
+      Principal: apigateway.amazonaws.com
+      SourceArn: !Sub "arn:aws:execute-api:${AWS::Region}:${AWS::AccountId}:${Api}/*/POST/contact"
+
+Outputs:
+  ContactEndpoint:
+    Description: Put this URL into siteConfig.contactFormEndpoint in js/data.js
+    Value: !Sub "https://${Api}.execute-api.${AWS::Region}.amazonaws.com/contact"

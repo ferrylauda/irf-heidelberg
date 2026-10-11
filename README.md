@@ -67,7 +67,7 @@ aws s3 mb s3://irf-heidelberg.org --region eu-central-1
 aws s3 website s3://irf-heidelberg.org --index-document index.html --error-document 404.html
 
 aws s3 sync . s3://irf-heidelberg.org --delete \
-  --exclude ".git/*" --exclude "README.md" \
+  --exclude ".git/*" --exclude "README.md" --exclude "backend/*" --exclude "aws/*" \
   --cache-control "public, max-age=3600"
 ```
 
@@ -75,3 +75,30 @@ For HTTPS on the custom domain, put **CloudFront** in front of the bucket (Origi
 bucket stays private), use an ACM certificate from `us-east-1`, and point the domain (Route 53 or
 your DNS provider) to the CloudFront distribution. With CloudFront, set the default root object to
 `index.html` and map 403/404 errors to `/404.html`.
+
+## Contact form
+
+The contact section has a form instead of an email address. It is a copy of the design used in
+the `persekutuanheidelberg` project: the browser POSTs JSON to an API Gateway (throttled, CORS),
+a Lambda checks it and sends it with Amazon SES to a private mailbox (Reply-To = visitor).
+Nothing is stored and no address is shown on the site. Spam protection: hidden honeypot field,
+server-side checks, CORS and throttling. Backend template: `backend/contact-form.yaml`.
+
+Until the backend is deployed, `CONTACT_ENDPOINT` in `js/main.js` is empty and the form only
+validates, then says honestly that nothing was sent.
+
+To go live:
+
+1. Deploy the stack in `eu-central-1` (needs CloudFormation, Lambda, API Gateway, IAM, SES and
+   Logs permissions, which the S3-only deploy user does not have):
+   ```
+   AWS_CLI_FILE_ENCODING=UTF-8 aws cloudformation deploy --region eu-central-1 \
+     --stack-name irf-contact-form --template-file backend/contact-form.yaml \
+     --capabilities CAPABILITY_IAM \
+     --parameter-overrides RecipientEmail=<private mailbox> SenderEmail=<same mailbox, or no-reply@your-domain>
+   ```
+2. Click the SES verification link that arrives at the recipient address.
+3. Read the `ContactEndpoint` output and put it into `CONTACT_ENDPOINT` in `js/main.js`, then redeploy the site.
+4. Add the final domain to `AllowedOrigins` if it differs from the defaults.
+
+The privacy text (`legal.p5`) already describes the form.

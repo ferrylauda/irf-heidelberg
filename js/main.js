@@ -208,6 +208,143 @@
     });
   });
 
+  /* ---------- Contact form ----------
+     Messages go to a small AWS backend (backend/contact-form.yaml) that e-mails
+     them to a private mailbox; nothing is stored and no address is shown on the site.
+     Paste the "ContactEndpoint" URL of the deployed stack below. While it is empty
+     the form only validates and says honestly that nothing was sent. */
+
+  var CONTACT_ENDPOINT = "";
+  var EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function t(key) {
+    var lang = html.getAttribute("lang");
+    var dict = (window.I18N && window.I18N[lang]) || {};
+    var fallback = (window.I18N && window.I18N.en) || {};
+    return dict[key] || fallback[key] || key;
+  }
+
+  function setI18n(el, key) {
+    el.setAttribute("data-i18n", key); // so it is re-translated when the language changes
+    el.textContent = t(key);
+  }
+
+  function sendContactMessage(form) {
+    if (!CONTACT_ENDPOINT) return Promise.resolve("demo");
+    return fetch(CONTACT_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: form.elements.name.value.trim(),
+        email: form.elements.email.value.trim(),
+        subject: form.elements.subject.value,
+        message: form.elements.message.value.trim(),
+        consent: form.elements.consent.checked,
+        website: form.elements.website.value, // honeypot, normally empty
+        lang: html.getAttribute("lang")
+      })
+    }).then(function (res) { return res.ok ? "sent" : "failed"; },
+            function () { return "failed"; });
+  }
+
+  function validateField(field) {
+    var value = field.type === "checkbox" ? field.checked : field.value.trim();
+    switch (field.name) {
+      case "name": return value ? "" : "contact.errorName";
+      case "email":
+        if (!value) return "contact.errorEmail";
+        return EMAIL_PATTERN.test(value) ? "" : "contact.errorEmailInvalid";
+      case "subject": return value ? "" : "contact.errorSubject";
+      case "message": return value.length >= 10 ? "" : "contact.errorMessage";
+      case "consent": return value ? "" : "contact.errorConsent";
+      default: return "";
+    }
+  }
+
+  function showFieldError(field, key) {
+    var error = document.getElementById("error-" + field.name);
+    field.setAttribute("aria-invalid", String(Boolean(key)));
+    field.closest(".field").classList.toggle("has-error", Boolean(key));
+    if (key) {
+      setI18n(error, key);
+    } else {
+      error.removeAttribute("data-i18n");
+      error.textContent = "";
+    }
+  }
+
+  (function initContactForm() {
+    var form = document.getElementById("contact-form");
+    if (!form) return;
+    var fields = Array.prototype.filter.call(form.querySelectorAll("input, select, textarea"),
+      function (f) { return f.name !== "website"; });
+    var summary = document.getElementById("form-error-summary");
+    var status = document.getElementById("form-status");
+    var submitButton = form.querySelector("button[type=submit]");
+    var prayerHint = document.getElementById("prayer-hint");
+    var submitted = false;
+    var sending = false;
+
+    function showStatus(state) {
+      setI18n(document.getElementById("form-status-title"), "contact." + state + "Title");
+      setI18n(document.getElementById("form-status-text"), "contact." + state + "Text");
+      status.classList.toggle("is-success", state === "sent");
+      status.classList.toggle("is-error", state === "failed");
+      status.hidden = false;
+      status.focus();
+    }
+
+    // After the first submit attempt, re-check fields while typing
+    fields.forEach(function (field) {
+      var evt = field.type === "checkbox" || field.tagName === "SELECT" ? "change" : "input";
+      field.addEventListener(evt, function () {
+        if (submitted) showFieldError(field, validateField(field));
+        status.hidden = true;
+      });
+    });
+
+    // Extra confidentiality note for prayer requests
+    form.elements.subject.addEventListener("change", function (e) {
+      prayerHint.hidden = e.target.value !== "prayer";
+    });
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      if (sending) return;
+      submitted = true;
+
+      var invalid = fields.filter(function (field) {
+        var key = validateField(field);
+        showFieldError(field, key);
+        return Boolean(key);
+      });
+      if (invalid.length) {
+        setI18n(summary, "contact.errorSummary");
+        summary.hidden = false;
+        status.hidden = true;
+        invalid[0].focus();
+        return;
+      }
+
+      summary.hidden = true;
+      sending = true;
+      submitButton.disabled = true;
+      setI18n(submitButton, "contact.sending");
+
+      sendContactMessage(form).then(function (state) {
+        sending = false;
+        submitButton.disabled = false;
+        setI18n(submitButton, "contact.submit");
+        if (state === "sent") {
+          form.reset();
+          submitted = false;
+          prayerHint.hidden = true;
+        }
+        showStatus(state); // on "failed" the entries are kept so people can retry
+      });
+    });
+  })();
+
   /* ---------- Footer year ---------- */
 
   document.querySelectorAll(".year").forEach(function (el) {

@@ -374,6 +374,58 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .contact-email a { color: #fff; text-decoration: none; border-bottom: 1px solid var(--gold); }
 .contact-email a:hover { color: var(--gold-soft); }
 
+/* ---------- Contact form ---------- */
+.contact-form {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: clamp(22px, 4vw, 40px);
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 20px; }
+.field { margin-bottom: 20px; }
+.field label { display: block; margin-bottom: 6px; font-size: .92rem; font-weight: 600; color: var(--navy-deep); }
+.req { color: #b3261e; }
+.field input[type="text"], .field input[type="email"], .field select, .field textarea {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--ivory);
+  color: var(--ink);
+  font: inherit;
+}
+.field textarea { min-height: 150px; resize: vertical; }
+.field input:hover, .field select:hover, .field textarea:hover { border-color: var(--gold-soft); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none;
+  border-color: var(--navy);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(180, 138, 78, .35);
+}
+.field.has-error input, .field.has-error select, .field.has-error textarea { border-color: #b3261e; }
+.field-error { margin: 6px 0 0; font-size: .88rem; font-weight: 500; color: #b3261e; }
+.field-error:empty { display: none; }
+.field-check { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 12px; align-items: start; }
+.field-check input { width: 20px; height: 20px; margin: 3px 0 0; accent-color: var(--navy); }
+.field-check label { margin: 0; font-weight: 400; font-size: .92rem; color: var(--ink); }
+.field-check .field-error { grid-column: 2; }
+.form-error-summary { margin-bottom: 20px; padding: 12px 16px; border-left: 4px solid #b3261e; border-radius: var(--radius); background: #fbeeec; color: #b3261e; font-weight: 600; }
+.prayer-hint { margin: -6px 0 20px; padding: 12px 16px; border-radius: var(--radius); background: var(--tint); color: var(--navy-deep); font-size: .92rem; }
+.form-status { margin-top: 22px; padding: 16px 18px; border: 1px solid var(--gold); border-left-width: 5px; border-radius: var(--radius); background: #fdf6e6; }
+.form-status:focus { outline: 3px solid var(--gold); outline-offset: 2px; }
+.form-status.is-success { border-color: #3a7d5a; background: #eaf5ee; }
+.form-status.is-error { border-color: #b3261e; background: #fbeeec; }
+.form-status-title { margin: 0 0 4px; font-weight: 700; color: var(--navy-deep); }
+.form-status p:last-child { margin: 0; color: var(--ink); }
+.contact-form .btn:disabled { opacity: .6; cursor: wait; }
+/* Spam-bot trap, never visible */
+.form-honeypot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
 /* ---------- Footer ---------- */
 .site-footer { background: #0d1a2d; color: #9fabb9; padding: 36px 0; font-size: .88rem; }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; }
@@ -448,6 +500,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
   .service-facts { grid-template-columns: 1fr; padding: 32px 24px; gap: 22px; }
   .service-expect { padding: 32px 24px; }
   .activity { padding: 26px 22px; }
+  .form-row-2 { grid-template-columns: 1fr; }
   .news-item { padding: 22px; }
   .notice-head, .notice-body { padding-left: 22px; padding-right: 22px; }
   .catechism-quote { padding: 40px 22px 30px; }

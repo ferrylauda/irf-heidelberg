@@ -3,13 +3,55 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>International Reformed Fellowship Heidelberg</title>
+  <title>International Reformed Fellowship Heidelberg – Reformed Church Service in English &amp; Indonesian</title>
   <meta name="description" content="International Reformed Fellowship Heidelberg – a Reformed, Bible-centred Christian community from many nations, holding to the Belgic Confession, the Heidelberg Catechism, the Westminster Confession of Faith and covenant theology. Sunday worship and prayer meeting in the Heidelberg area, Germany.">
   <meta property="og:title" content="International Reformed Fellowship Heidelberg">
   <meta property="og:description" content="A Reformed Christian community from many nations, gathering every Sunday in the Heidelberg area.">
-  <meta property="og:url" content="https://irf-heidelberg.org/">
+  <meta property="og:url" content="https://www.irf-heidelberg.org/">
   <meta property="og:type" content="website">
-  <link rel="canonical" href="https://irf-heidelberg.org/">
+  <meta property="og:site_name" content="IRF Heidelberg">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:locale:alternate" content="id_ID">
+  <meta property="og:locale:alternate" content="de_DE">
+  <meta name="twitter:card" content="summary">
+  <link rel="canonical" href="https://www.irf-heidelberg.org/">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.irf-heidelberg.org/#organization",
+        "name": "International Reformed Fellowship Heidelberg",
+        "alternateName": "IRF Heidelberg",
+        "url": "https://www.irf-heidelberg.org/",
+        "description": "A Reformed, Bible-centred Christian community from many nations, gathering in the Heidelberg area.",
+        "knowsLanguage": ["en", "id", "de"],
+        "areaServed": "Heidelberg, Germany"
+      },
+      {
+        "@type": "Event",
+        "name": "Sunday Service",
+        "description": "Reformed worship service in English and Indonesian, with German translation if needed. Visitors are welcome.",
+        "organizer": { "@id": "https://www.irf-heidelberg.org/#organization" },
+        "eventSchedule": {
+          "@type": "Schedule",
+          "byDay": "https://schema.org/Sunday",
+          "startTime": "15:30",
+          "repeatFrequency": "P1W",
+          "scheduleTimezone": "Europe/Berlin"
+        },
+        "inLanguage": ["en", "id"],
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "location": {
+          "@type": "Place",
+          "name": "Heidelberg area",
+          "address": { "@type": "PostalAddress", "addressLocality": "Heidelberg", "addressCountry": "DE" }
+        }
+      }
+    ]
+  }
+  </script>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="css/styles.css">
 </head>

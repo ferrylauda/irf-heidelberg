@@ -99,8 +99,12 @@
       (news.items || []).forEach(function (item) {
         list.appendChild(newsItem(pick(item.title, lang), pick(item.text, lang), formatDate(item.date, lang), false));
       });
-      var empty = document.getElementById("news-empty");
-      if (empty) empty.hidden = list.children.length > 0;
+      // No announcements: hide the whole section and its menu link
+      var hasNews = list.children.length > 0;
+      var section = document.getElementById("news");
+      if (section) section.hidden = !hasNews;
+      var navLink = document.querySelector('.main-nav a[href="#news"]');
+      if (navLink && navLink.parentNode) navLink.parentNode.hidden = !hasNews;
     }
 
     var dialog = document.getElementById("notice-dialog");

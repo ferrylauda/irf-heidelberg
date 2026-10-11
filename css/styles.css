@@ -275,7 +275,6 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .news-item.is-breaking .news-meta { color: var(--navy); }
 .news-item h3 { font-size: 1.3rem; margin-bottom: .3em; }
 .news-item p:last-child { margin: 0; white-space: pre-line; }
-.news-empty { text-align: center; color: var(--muted); margin: 0; }
 
 /* Breaking news pop-up */
 .notice-dialog {

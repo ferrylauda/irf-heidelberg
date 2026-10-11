@@ -29,20 +29,14 @@ window.NEWS = {
   },
 
   /* Announcements, newest first. Date format: YYYY-MM-DD.
-     Copy a block { ... }, to add a new one. */
-  items: [
-    {
-      date: "2026-10-07",
-      title: {
-        en: "Welcome to our new website",
-        id: "Selamat datang di situs web kami yang baru",
-        de: "Willkommen auf unserer neuen Website"
-      },
-      text: {
-        en: "Here you will find our service times, upcoming events and important announcements – for example about our Christmas service.",
-        id: "Di sini Anda dapat menemukan jadwal ibadah, acara mendatang, dan pengumuman penting – misalnya tentang ibadah Natal kami.",
-        de: "Hier finden Sie unsere Gottesdienstzeiten, kommende Veranstaltungen und wichtige Ankündigungen – zum Beispiel zu unserem Weihnachtsgottesdienst."
-      }
-    }
-  ]
+     While this list is empty (and no breaking news is active), the whole
+     News section and its menu link are hidden. To add one, put a block
+     like this inside the brackets:
+     {
+       date: "2026-12-24",
+       title: { en: "...", id: "...", de: "..." },
+       text:  { en: "...", id: "...", de: "..." }
+     }
+     Separate several blocks with commas. */
+  items: []
 };

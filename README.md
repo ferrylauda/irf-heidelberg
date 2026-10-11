@@ -36,7 +36,6 @@ Search for `TODO` in the HTML files:
 
 - Contact email (`info@irf-heidelberg.org`)
 - WhatsApp contact (Hendry): commented out in the contact section until the number is known
-- The sample news item in `js/news.js`
 - Impressum details in `legal.html` (responsible person / association)
 
 ## Editing text
@@ -48,7 +47,8 @@ The English text in the HTML is only a fallback; when you change a text, update 
 
 Everything is edited in `js/news.js` (texts once per language):
 
-- **News:** add an entry to `items` (newest first, date as `YYYY-MM-DD`).
+- **News:** add an entry to `items` (newest first, date as `YYYY-MM-DD`). While `items` is empty
+  and no breaking news is active, the News section and its menu link are hidden.
 - **Breaking news pop-up** (e.g. a short-notice change of service time): fill in `breaking`,
   set `active: true` and give it a new `id`. Visitors see it as a pop-up once; after closing
   it, it stays pinned at the top of the News section. Set `active: false` to remove it.

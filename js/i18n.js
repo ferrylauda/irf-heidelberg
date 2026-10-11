@@ -23,7 +23,6 @@ window.I18N = {
     "hero.verseRef": "Matthew 28:19–20",
     "news.eyebrow": "News",
     "news.title": "Announcements",
-    "news.empty": "There are no announcements at the moment.",
     "notice.label": "Important notice",
     "notice.close": "OK, got it",
 
@@ -158,7 +157,6 @@ window.I18N = {
     "hero.verseRef": "Matius 28:19–20",
     "news.eyebrow": "Berita",
     "news.title": "Pengumuman",
-    "news.empty": "Saat ini belum ada pengumuman.",
     "notice.label": "Pemberitahuan penting",
     "notice.close": "Baik, mengerti",
 
@@ -293,7 +291,6 @@ window.I18N = {
     "hero.verseRef": "Matthäus 28,19–20",
     "news.eyebrow": "Aktuelles",
     "news.title": "Ankündigungen",
-    "news.empty": "Zurzeit gibt es keine Ankündigungen.",
     "notice.label": "Wichtiger Hinweis",
     "notice.close": "Verstanden",
 

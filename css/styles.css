@@ -257,8 +257,8 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .activity h3 { font-size: 1.35rem; margin-bottom: .15em; }
 .activity-meta { margin: 0 0 .6em; font-size: .74rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--navy); }
 .activity p:last-child { margin: 0; color: var(--muted); font-size: .98rem; }
-/* A single activity spans the full width, in line with the service card */
-.activity:only-child { grid-column: 1 / -1; align-items: center; padding: 30px 44px; }
+/* A single activity keeps the normal card width, centred */
+.activity:only-child { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); min-width: 380px; }
 
 /* ---------- News ---------- */
 .news-list { list-style: none; margin: 0 auto; padding: 0; max-width: 760px; display: grid; gap: 18px; }
@@ -432,6 +432,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 
   .service-card, .confession-grid, .location-grid { grid-template-columns: 1fr; }
   .activities { grid-template-columns: 1fr; }
+  .activity:only-child { width: auto; min-width: 0; }
   .solas { grid-template-columns: repeat(2, 1fr); }
   .solas li:last-child { grid-column: span 2; }
 }
@@ -444,7 +445,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
   .values { grid-template-columns: 1fr; gap: 16px; margin-top: 40px; }
   .service-facts { grid-template-columns: 1fr; padding: 32px 24px; gap: 22px; }
   .service-expect { padding: 32px 24px; }
-  .activity, .activity:only-child { padding: 26px 22px; }
+  .activity { padding: 26px 22px; }
   .news-item { padding: 22px; }
   .notice-head, .notice-body { padding-left: 22px; padding-right: 22px; }
   .catechism-quote { padding: 40px 22px 30px; }

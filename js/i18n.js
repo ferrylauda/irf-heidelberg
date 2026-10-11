@@ -6,6 +6,12 @@
 
 window.I18N = {
   en: {
+    "seo.title": "International Reformed Fellowship Heidelberg – Reformed Church Service in English & Indonesian",
+    "seo.description": "International Reformed Fellowship Heidelberg – a Reformed, Bible-centred Christian community from many nations, holding to the Belgic Confession, the Heidelberg Catechism, the Westminster Confession of Faith and covenant theology. Sunday worship and prayer meeting in the Heidelberg area, Germany.",
+    "seo.ogDescription": "A Reformed Christian community from many nations, gathering every Sunday in the Heidelberg area.",
+    "seo.orgDescription": "A Reformed, Bible-centred Christian community from many nations, gathering in the Heidelberg area.",
+    "seo.eventName": "Sunday Service",
+    "seo.eventDescription": "Reformed worship service in English and Indonesian, with German translation if needed. Visitors are welcome.",
     "nav.home": "Home",
     "nav.news": "News",
     "nav.about": "About us",
@@ -140,6 +146,12 @@ window.I18N = {
   },
 
   id: {
+    "seo.title": "International Reformed Fellowship Heidelberg – Ibadah Gereja Reformed dalam Bahasa Inggris & Indonesia",
+    "seo.description": "International Reformed Fellowship Heidelberg – persekutuan Kristen Reformed yang berpusat pada Alkitab, dari berbagai bangsa, yang berpegang pada Pengakuan Iman Belanda, Katekismus Heidelberg, Pengakuan Iman Westminster, dan teologi perjanjian. Ibadah Minggu dan persekutuan doa di wilayah Heidelberg, Jerman.",
+    "seo.ogDescription": "Persekutuan Kristen Reformed dari berbagai bangsa, berkumpul setiap hari Minggu di wilayah Heidelberg.",
+    "seo.orgDescription": "Persekutuan Kristen Reformed yang berpusat pada Alkitab, dari berbagai bangsa, berkumpul di wilayah Heidelberg.",
+    "seo.eventName": "Ibadah Minggu",
+    "seo.eventDescription": "Ibadah Reformed dalam bahasa Inggris dan Indonesia, dengan terjemahan bahasa Jerman jika diperlukan. Pengunjung selalu disambut.",
     "nav.home": "Beranda",
     "nav.news": "Berita",
     "nav.about": "Tentang Kami",
@@ -274,6 +286,12 @@ window.I18N = {
   },
 
   de: {
+    "seo.title": "International Reformed Fellowship Heidelberg – Reformierter Gottesdienst auf Englisch & Indonesisch",
+    "seo.description": "International Reformed Fellowship Heidelberg – eine reformierte, bibeltreue christliche Gemeinschaft aus vielen Nationen, die sich zum Niederländischen Glaubensbekenntnis, zum Heidelberger Katechismus, zum Westminster-Bekenntnis und zur Bundestheologie bekennt. Sonntäglicher Gottesdienst und Gebetstreffen im Raum Heidelberg.",
+    "seo.ogDescription": "Eine reformierte christliche Gemeinschaft aus vielen Nationen, die sich jeden Sonntag im Raum Heidelberg versammelt.",
+    "seo.orgDescription": "Eine reformierte, bibeltreue christliche Gemeinschaft aus vielen Nationen im Raum Heidelberg.",
+    "seo.eventName": "Sonntagsgottesdienst",
+    "seo.eventDescription": "Reformierter Gottesdienst auf Englisch und Indonesisch, bei Bedarf mit deutscher Übersetzung. Besucher sind herzlich willkommen.",
     "nav.home": "Startseite",
     "nav.news": "Aktuelles",
     "nav.about": "Über uns",

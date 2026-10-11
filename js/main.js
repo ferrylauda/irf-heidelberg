@@ -2,8 +2,11 @@
   "use strict";
 
   var SUPPORTED = ["en", "id", "de"];
+  var LANG_PATHS = { en: "/", id: "/id/", de: "/de/" };
   var STORAGE_KEY = "irf-lang";
   var html = document.documentElement;
+  // Set on the language pages (/, /id/, /de/). The privacy page has none and switches in place.
+  var PAGE_LANG = html.getAttribute("data-static-lang");
   var header = document.querySelector(".site-header");
 
   /* ---------- Language ---------- */
@@ -45,8 +48,13 @@
 
     html.setAttribute("lang", lang);
 
-    document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-      btn.setAttribute("aria-pressed", btn.getAttribute("data-lang") === lang ? "true" : "false");
+    document.querySelectorAll(".lang-switch [data-lang]").forEach(function (btn) {
+      var active = btn.getAttribute("data-lang") === lang;
+      if (btn.tagName === "A") {
+        if (active) btn.setAttribute("aria-current", "true"); else btn.removeAttribute("aria-current");
+      } else {
+        btn.setAttribute("aria-pressed", active ? "true" : "false");
+      }
     });
 
     renderNews(lang);
@@ -127,15 +135,35 @@
     dialog.showModal();
   }
 
-  document.querySelectorAll(".lang-switch button").forEach(function (btn) {
-    btn.addEventListener("click", function () {
+  document.querySelectorAll(".lang-switch [data-lang]").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
       var lang = btn.getAttribute("data-lang");
       storageSet(lang);
-      applyLanguage(lang);
+      if (PAGE_LANG) {
+        // Language pages are separate URLs: go there and keep the section the visitor is reading
+        e.preventDefault();
+        if (lang !== PAGE_LANG) window.location.href = LANG_PATHS[lang] + window.location.hash;
+      } else {
+        applyLanguage(lang);
+      }
     });
   });
 
-  applyLanguage(detectLanguage());
+  if (PAGE_LANG) {
+    if (PAGE_LANG === "en") {
+      // The English page also serves visitors whose saved or browser language is another one
+      var wanted = detectLanguage();
+      if (wanted !== "en") {
+        window.location.replace(LANG_PATHS[wanted] + window.location.hash);
+        return;
+      }
+    } else {
+      storageSet(PAGE_LANG); // so the privacy page and the next visit use the same language
+    }
+    applyLanguage(PAGE_LANG);
+  } else {
+    applyLanguage(detectLanguage());
+  }
   showBreakingNews();
 
   /* ---------- Header & mobile menu ---------- */

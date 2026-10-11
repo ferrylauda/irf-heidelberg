@@ -1,12 +1,15 @@
 # IRF Heidelberg – Website
 
 Static website for the **International Reformed Fellowship Heidelberg** (irf-heidelberg.org).
-Plain HTML/CSS/JS, no build step. Languages: English, Bahasa Indonesia, Deutsch.
+Plain HTML/CSS/JS. Languages: English, Bahasa Indonesia, Deutsch, each on its own URL
+(`/`, `/id/`, `/de/`) so that search engines index all three.
 
 ## Structure
 
 ```
-index.html      Single-page site: Home, News, About, Sunday Service, Confession, Location, Contact
+index.html      English single-page site (the source): Home, News, About, Sunday Service, Confession, Location, Contact
+id/ de/         Generated Indonesian and German copies of index.html - do not edit by hand
+tools/          build-languages.js generates id/, de/ and sitemap.xml
 legal.html      Impressum & Datenschutz (required for German websites)
 404.html        Error page for S3
 css/styles.css  All styles (colours are CSS variables at the top)
@@ -18,13 +21,15 @@ favicon.svg
 
 ## Preview locally
 
-Open `index.html` in a browser, or run a small server:
+Run the small preview server (Node.js, no install needed):
 
 ```
-python -m http.server 8000
-# or, with Node.js:
-npx http-server -p 8000 -c-1
+node tools/serve.js
 ```
+
+Then open http://localhost:8000 (English), http://localhost:8000/id/ or http://localhost:8000/de/.
+Opening the HTML files directly from disk does not work for the language pages, because they use
+absolute paths like `/css/styles.css`.
 
 Then open http://localhost:8000. Add `?lang=de` or `?lang=id` to force a language.
 
@@ -40,8 +45,19 @@ Search for `TODO` in the HTML files:
 
 ## Editing text
 
-All visible text lives in `js/i18n.js`, once per language under the same key.
-The English text in the HTML is only a fallback; when you change a text, update `js/i18n.js`.
+All visible text lives in `js/i18n.js`, once per language under the same key (including the
+`seo.*` keys for page title, description and structured data).
+The English text in `index.html` must match `js/i18n.js`.
+
+**After every change to `index.html` or `js/i18n.js`, run:**
+
+```bash
+node tools/build-languages.js
+```
+
+It regenerates `id/index.html`, `de/index.html` and `sitemap.xml` (the generated files are
+committed). Visitors on `/` whose saved or browser language is Indonesian or German are sent to
+`/id/` or `/de/`. The privacy page (`legal.html`) switches language in place.
 
 ## News and breaking news
 
@@ -65,13 +81,13 @@ Everything is edited in `js/news.js` (texts once per language):
 The site is live at https://www.irf-heidelberg.org (`irf-heidelberg.org` redirects to `www`).
 Setup: private S3 bucket `www.irf-heidelberg.org` (eu-central-1) -> CloudFront distribution
 `E2L6W284HEF46S` (Origin Access Control, ACM certificate in us-east-1, redirect function
-`aws/redirect-apex.js`) -> Route 53 zone `Z06221612TJEPIZM30K1M`.
+`aws/redirect-apex.js`, which also serves `/id/` and `/de/` from their `index.html`) -> Route 53 zone `Z06221612TJEPIZM30K1M`.
 
 To publish changes (AWS CLI profile `irf-heidelberg`):
 
 ```bash
 aws s3 sync . s3://www.irf-heidelberg.org --delete \
-  --exclude ".git/*" --exclude ".gitignore" --exclude "README.md" --exclude "backend/*" --exclude "aws/*" \
+  --exclude ".git/*" --exclude ".gitignore" --exclude "README.md" --exclude "backend/*" --exclude "aws/*" --exclude "tools/*" \
   --cache-control "public, max-age=3600"
 aws cloudfront create-invalidation --distribution-id E2L6W284HEF46S --paths "/*"
 ```

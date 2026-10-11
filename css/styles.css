@@ -349,7 +349,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .location-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: stretch; }
 .location-info h3 { font-size: 1.25rem; margin-top: 1.4em; }
 .location-info h3:first-child { margin-top: 0; }
-.location-info .h3-note { font-family: var(--sans); font-size: .85rem; font-weight: 400; color: var(--muted); }
+.location-info .address-note { font-family: var(--sans); font-size: .85rem; font-weight: 400; color: var(--muted); }
 .location-info address { font-style: normal; font-size: 1.1rem; }
 .location-info p { color: var(--muted); }
 .map-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }

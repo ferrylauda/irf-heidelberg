@@ -7,7 +7,7 @@ Plain HTML/CSS/JS. Languages: English, Bahasa Indonesia, Deutsch, each on its ow
 ## Structure
 
 ```
-index.html      English single-page site (the source): Home, News, About, Sunday Service, Confession, Location, Contact
+index.html      English single-page site (the source): Home, News, About, Sunday Fellowship, Confession, Location, Contact
 id/ de/         Generated Indonesian and German copies of index.html - do not edit by hand
 tools/          build-languages.js generates id/, de/ and sitemap.xml
 legal.html      Impressum & Datenschutz (required for German websites)

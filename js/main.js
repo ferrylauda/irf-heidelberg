@@ -215,10 +215,10 @@
   /* ---------- Contact form ----------
      Messages go to a small AWS backend (backend/contact-form.yaml) that e-mails
      them to a private mailbox; nothing is stored and no address is shown on the site.
-     Paste the "ContactEndpoint" URL of the deployed stack below. While it is empty
-     the form only validates and says honestly that nothing was sent. */
+     This is the "ContactEndpoint" URL of the deployed stack. If it is empty, the form
+     only validates and says honestly that nothing was sent. */
 
-  var CONTACT_ENDPOINT = "";
+  var CONTACT_ENDPOINT = "https://yfbnrb0l8j.execute-api.eu-central-1.amazonaws.com/contact";
   var EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   function t(key) {

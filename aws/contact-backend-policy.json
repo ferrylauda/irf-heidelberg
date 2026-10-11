@@ -55,15 +55,7 @@
     {
       "Sid": "HttpApi",
       "Effect": "Allow",
-      "Action": [
-        "apigateway:GET",
-        "apigateway:POST",
-        "apigateway:PUT",
-        "apigateway:PATCH",
-        "apigateway:DELETE",
-        "apigateway:TagResource",
-        "apigateway:UntagResource"
-      ],
+      "Action": "apigateway:*",
       "Resource": [
         "arn:aws:apigateway:eu-central-1::/apis",
         "arn:aws:apigateway:eu-central-1::/apis/*",

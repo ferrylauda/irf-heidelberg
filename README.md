@@ -60,21 +60,23 @@ Everything is edited in `js/news.js` (texts once per language):
   and add a nav link `<a href="#gallery" data-i18n="nav.gallery">Gallery</a>`.
   The translations for the gallery are already in `js/i18n.js`.
 
-## Deploy to AWS S3
+## Deploy to AWS (live)
+
+The site is live at https://www.irf-heidelberg.org (`irf-heidelberg.org` redirects to `www`).
+Setup: private S3 bucket `www.irf-heidelberg.org` (eu-central-1) -> CloudFront distribution
+`E2L6W284HEF46S` (Origin Access Control, ACM certificate in us-east-1, redirect function
+`aws/redirect-apex.js`) -> Route 53 zone `Z06221612TJEPIZM30K1M`.
+
+To publish changes (AWS CLI profile `irf-heidelberg`):
 
 ```bash
-aws s3 mb s3://irf-heidelberg.org --region eu-central-1
-aws s3 website s3://irf-heidelberg.org --index-document index.html --error-document 404.html
-
-aws s3 sync . s3://irf-heidelberg.org --delete \
-  --exclude ".git/*" --exclude "README.md" --exclude "backend/*" --exclude "aws/*" \
+aws s3 sync . s3://www.irf-heidelberg.org --delete \
+  --exclude ".git/*" --exclude ".gitignore" --exclude "README.md" --exclude "backend/*" --exclude "aws/*" \
   --cache-control "public, max-age=3600"
+aws cloudfront create-invalidation --distribution-id E2L6W284HEF46S --paths "/*"
 ```
 
-For HTTPS on the custom domain, put **CloudFront** in front of the bucket (Origin Access Control,
-bucket stays private), use an ACM certificate from `us-east-1`, and point the domain (Route 53 or
-your DNS provider) to the CloudFront distribution. With CloudFront, set the default root object to
-`index.html` and map 403/404 errors to `/404.html`.
+The IAM policies for the deploy user are in `aws/`.
 
 ## Contact form
 
@@ -84,21 +86,19 @@ a Lambda checks it and sends it with Amazon SES to a private mailbox (Reply-To =
 Nothing is stored and no address is shown on the site. Spam protection: hidden honeypot field,
 server-side checks, CORS and throttling. Backend template: `backend/contact-form.yaml`.
 
-Until the backend is deployed, `CONTACT_ENDPOINT` in `js/main.js` is empty and the form only
-validates, then says honestly that nothing was sent.
+Deployed as stack `irf-contact-form` (eu-central-1); `CONTACT_ENDPOINT` in `js/main.js` is set.
+To redeploy or change it:
 
-To go live:
+```
+AWS_CLI_FILE_ENCODING=UTF-8 aws cloudformation deploy --region eu-central-1 \
+  --stack-name irf-contact-form --template-file backend/contact-form.yaml \
+  --capabilities CAPABILITY_IAM \
+  --parameter-overrides RecipientEmail=ferry.lauda@gmx.de SenderEmail=no-reply@irf-heidelberg.org \
+    SenderDomain=irf-heidelberg.org HostedZoneId=Z06221612TJEPIZM30K1M CreateRecipientIdentity=false
+```
 
-1. Deploy the stack in `eu-central-1` (needs CloudFormation, Lambda, API Gateway, IAM, SES and
-   Logs permissions, which the S3-only deploy user does not have):
-   ```
-   AWS_CLI_FILE_ENCODING=UTF-8 aws cloudformation deploy --region eu-central-1 \
-     --stack-name irf-contact-form --template-file backend/contact-form.yaml \
-     --capabilities CAPABILITY_IAM \
-     --parameter-overrides RecipientEmail=<private mailbox> SenderEmail=<same mailbox, or no-reply@your-domain>
-   ```
-2. Click the SES verification link that arrives at the recipient address.
-3. Read the `ContactEndpoint` output and put it into `CONTACT_ENDPOINT` in `js/main.js`, then redeploy the site.
-4. Add the final domain to `AllowedOrigins` if it differs from the defaults.
+`CreateRecipientIdentity=false` because the recipient address already exists as a verified SES
+identity (another project). SES is still in sandbox mode, which is fine: mail only goes to that
+verified address. If the endpoint URL changes, update `CONTACT_ENDPOINT` and redeploy the site.
 
 The privacy text (`legal.p5`) already describes the form.

@@ -94,7 +94,7 @@ window.I18N = {
 
     "location.eyebrow": "Location",
     "location.title": "Where we meet",
-    "location.addressLabel": "Town",
+    "location.addressLabel": "Address",
     "location.country": "Germany",
     "location.addressNote": "Address shared after contacting us",
     "location.googleMaps": "Open in Google Maps",
@@ -213,7 +213,7 @@ window.I18N = {
 
     "location.eyebrow": "Lokasi",
     "location.title": "Tempat kami berkumpul",
-    "location.addressLabel": "Kota",
+    "location.addressLabel": "Alamat",
     "location.country": "Jerman",
     "location.addressNote": "Alamat diinformasikan setelah menghubungi kami",
     "location.googleMaps": "Buka di Google Maps",
@@ -332,7 +332,7 @@ window.I18N = {
 
     "location.eyebrow": "Anfahrt",
     "location.title": "Hier treffen wir uns",
-    "location.addressLabel": "Ort",
+    "location.addressLabel": "Adresse",
     "location.country": "Deutschland",
     "location.addressNote": "Adresse nach Kontaktaufnahme",
     "location.googleMaps": "In Google Maps öffnen",

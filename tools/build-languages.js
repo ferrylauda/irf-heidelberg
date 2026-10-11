@@ -1,16 +1,20 @@
 #!/usr/bin/env node
 /*
-  Builds the Indonesian and German home pages and the sitemap.
+  1. Stamps every CSS/JS reference in index.html, legal.html and 404.html with a content hash
+     (styles.css?v=1a2b3c4d5e). A changed file gets a new URL, so browsers never mix an old
+     stylesheet or script with new HTML. The files are deployed with a one-year cache lifetime.
+  2. Builds the Indonesian and German home pages and the sitemap.
 
     index.html (English, the source)  +  js/i18n.js  ->  id/index.html, de/index.html, sitemap.xml
 
-  Run after every change to index.html or js/i18n.js:   node tools/build-languages.js
+  Run after every change to index.html, js/i18n.js, css/ or js/:   node tools/build-languages.js
   The generated files are committed, so deploying needs no build step.
   Do not edit id/index.html or de/index.html by hand.
 */
 const fs = require("fs");
 const path = require("path");
 const vm = require("vm");
+const crypto = require("crypto");
 
 const root = path.join(__dirname, "..");
 const BASE = "https://www.irf-heidelberg.org";
@@ -21,6 +25,19 @@ const LANGS = {
 };
 
 const read = (file) => fs.readFileSync(path.join(root, file), "utf8").replace(/\r\n/g, "\n");
+
+// Version stamps for css/ and js/ files
+const ASSET_REF = /((?:href|src)="\/?)((?:css|js)\/[\w.-]+\.(?:css|js))(\?v=[0-9a-f]+)?(")/g;
+const versionOf = (file) => crypto.createHash("md5").update(read(file)).digest("hex").slice(0, 10);
+for (const page of ["index.html", "legal.html", "404.html"]) {
+  const before = read(page);
+  const after = before.replace(ASSET_REF, (m, open, file, old, close) => `${open}${file}?v=${versionOf(file)}${close}`);
+  if (after !== before) {
+    fs.writeFileSync(path.join(root, page), after, "utf8");
+    console.log(`stamped asset versions in ${page}`);
+  }
+}
+
 const source = read("index.html");
 
 const sandbox = { window: {} };

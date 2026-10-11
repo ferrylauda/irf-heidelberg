@@ -86,11 +86,24 @@ Setup: private S3 bucket `www.irf-heidelberg.org` (eu-central-1) -> CloudFront d
 To publish changes (AWS CLI profile `irf-heidelberg`):
 
 ```bash
+node tools/build-languages.js   # stamps css/js with version hashes, rebuilds id/ de/ sitemap
+
+# 1. css/ and js/ have a version hash in their URL: cache them for a year
 aws s3 sync . s3://www.irf-heidelberg.org --delete \
-  --exclude ".git/*" --exclude ".gitignore" --exclude "README.md" --exclude "backend/*" --exclude "aws/*" --exclude "tools/*" \
-  --cache-control "public, max-age=3600"
+  --exclude "*" --include "css/*" --include "js/*" \
+  --cache-control "public, max-age=31536000, immutable"
+
+# 2. everything else (HTML, sitemap, images): browsers must revalidate, so a new deploy shows at once
+aws s3 sync . s3://www.irf-heidelberg.org --delete \
+  --exclude ".git/*" --exclude ".gitignore" --exclude "README.md" --exclude "backend/*" \
+  --exclude "aws/*" --exclude "tools/*" --exclude "css/*" --exclude "js/*" \
+  --cache-control "no-cache"
+
 aws cloudfront create-invalidation --distribution-id E2L6W284HEF46S --paths "/*"
 ```
+
+Why: without version hashes and `no-cache` on the HTML, a browser could combine the new page with
+an old cached stylesheet or script (a broken design until Ctrl+F5).
 
 The IAM policies for the deploy user are in `aws/`.
 

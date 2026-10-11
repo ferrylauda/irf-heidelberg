@@ -125,9 +125,9 @@ window.I18N = {
     "contact.demoText": "Your entries are fine, but the form is not yet connected to email delivery. No message was sent.",
     "contact.whatsapp": "WhatsApp",
 
-    "footer.legal": "Imprint & Privacy",
+    "footer.legal": "Privacy Policy",
 
-    "legal.title": "Imprint & Privacy",
+    "legal.title": "Privacy Policy",
     "legal.imprintTitle": "Imprint",
     "legal.imprintIntro": "Information pursuant to § 5 DDG (German Digital Services Act):",
     "legal.privacyTitle": "Privacy Policy",
@@ -136,7 +136,7 @@ window.I18N = {
     "legal.p3": "Map: The map on our homepage is only loaded from OpenStreetMap after you click “Show map”. In that case your IP address is transmitted to the OpenStreetMap Foundation.",
     "legal.p4": "Local settings: Your chosen language, and whether you have closed an announcement pop-up, are stored only locally in your browser (localStorage) and are never sent to us.",
     "legal.p5": "Contact form: If you write to us via the contact form, your name, email address and message are sent by email through Amazon Web Services (AWS, Frankfurt) to our private mailbox. We use them only to answer your enquiry. The message is not stored on the website or its server. Legal basis: your consent (Art. 6(1)(a) GDPR). A hidden spam-protection field is used; no cookies or tracking.",
-    "legal.p6": "You have the right to information, correction, deletion and restriction of processing of your data, as well as the right to lodge a complaint with a data protection supervisory authority. Please contact us at the address above.",
+    "legal.p6": "You have the right to information, correction, deletion and restriction of processing of your data, as well as the right to lodge a complaint with a data protection supervisory authority. Please contact us via the contact form on our homepage.",
     "legal.back": "← Back to the homepage"
   },
 
@@ -260,9 +260,9 @@ window.I18N = {
     "contact.demoText": "Isian Anda sudah benar, tetapi formulir ini belum terhubung ke layanan email. Tidak ada pesan yang dikirim.",
     "contact.whatsapp": "WhatsApp",
 
-    "footer.legal": "Impresum & Privasi",
+    "footer.legal": "Kebijakan Privasi",
 
-    "legal.title": "Impresum & Privasi",
+    "legal.title": "Kebijakan Privasi",
     "legal.imprintTitle": "Impresum",
     "legal.imprintIntro": "Informasi sesuai § 5 DDG (Undang-Undang Layanan Digital Jerman):",
     "legal.privacyTitle": "Kebijakan Privasi",
@@ -271,7 +271,7 @@ window.I18N = {
     "legal.p3": "Peta: Peta di halaman utama hanya dimuat dari OpenStreetMap setelah Anda mengklik “Tampilkan peta”. Dalam hal ini, alamat IP Anda dikirim ke OpenStreetMap Foundation.",
     "legal.p4": "Pengaturan lokal: Bahasa yang Anda pilih dan informasi apakah Anda telah menutup pop-up pengumuman hanya disimpan secara lokal di browser Anda (localStorage) dan tidak pernah dikirim kepada kami.",
     "legal.p5": "Formulir kontak: Jika Anda menulis kepada kami melalui formulir kontak, nama, alamat email, dan pesan Anda dikirim melalui email dengan Amazon Web Services (AWS, Frankfurt) ke kotak surat pribadi kami. Data tersebut hanya kami gunakan untuk menjawab pertanyaan Anda. Pesan tidak disimpan di situs web maupun servernya. Dasar hukum: persetujuan Anda (Pasal 6 ayat 1 huruf a GDPR). Kami memakai kolom tersembunyi sebagai perlindungan spam; tidak ada cookie atau pelacakan.",
-    "legal.p6": "Anda berhak memperoleh informasi, perbaikan, penghapusan, dan pembatasan pemrosesan data Anda, serta berhak mengajukan keluhan kepada otoritas pengawas perlindungan data. Silakan hubungi kami melalui alamat di atas.",
+    "legal.p6": "Anda berhak memperoleh informasi, perbaikan, penghapusan, dan pembatasan pemrosesan data Anda, serta berhak mengajukan keluhan kepada otoritas pengawas perlindungan data. Silakan hubungi kami melalui formulir kontak di beranda kami.",
     "legal.back": "← Kembali ke beranda"
   },
 
@@ -395,9 +395,9 @@ window.I18N = {
     "contact.demoText": "Ihre Eingaben sind in Ordnung, aber das Formular ist noch nicht mit dem E-Mail-Versand verbunden. Es wurde keine Nachricht gesendet.",
     "contact.whatsapp": "WhatsApp",
 
-    "footer.legal": "Impressum & Datenschutz",
+    "footer.legal": "Datenschutzerklärung",
 
-    "legal.title": "Impressum & Datenschutz",
+    "legal.title": "Datenschutzerklärung",
     "legal.imprintTitle": "Impressum",
     "legal.imprintIntro": "Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz):",
     "legal.privacyTitle": "Datenschutzerklärung",
@@ -406,7 +406,7 @@ window.I18N = {
     "legal.p3": "Karte: Die Karte auf unserer Startseite wird erst dann von OpenStreetMap geladen, wenn Sie auf „Karte anzeigen“ klicken. In diesem Fall wird Ihre IP-Adresse an die OpenStreetMap Foundation übertragen.",
     "legal.p4": "Lokale Einstellungen: Die von Ihnen gewählte Sprache und die Information, ob Sie ein Hinweis-Fenster geschlossen haben, werden ausschließlich lokal in Ihrem Browser (localStorage) gespeichert und niemals an uns übermittelt.",
     "legal.p5": "Kontaktformular: Wenn Sie uns über das Kontaktformular schreiben, werden Ihr Name, Ihre E-Mail-Adresse und Ihre Nachricht per E-Mail über Amazon Web Services (AWS, Frankfurt) an unser privates Postfach übermittelt. Wir verwenden sie ausschließlich zur Beantwortung Ihrer Anfrage. Die Nachricht wird nicht auf der Website oder deren Server gespeichert. Rechtsgrundlage: Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Zum Spamschutz wird ein verstecktes Feld verwendet; es gibt keine Cookies oder Tracking.",
-    "legal.p6": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten sowie das Recht auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Wenden Sie sich dazu bitte an die oben genannte Adresse.",
+    "legal.p6": "Sie haben das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten sowie das Recht auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde. Wenden Sie sich dazu bitte über das Kontaktformular auf unserer Startseite an uns.",
     "legal.back": "← Zurück zur Startseite"
   }
 };

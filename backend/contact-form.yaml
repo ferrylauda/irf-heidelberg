@@ -148,11 +148,6 @@ Resources:
         ZipFile: |
           const { SESv2Client, SendEmailCommand } = require("@aws-sdk/client-sesv2");
           const ses = new SESv2Client({});
-          const SUBJECTS = {
-            visit: "Visit / Besuch / Ingin berkunjung",
-            question: "General question / Allgemeine Frage / Pertanyaan umum",
-            prayer: "Prayer request / Gebetsanliegen / Pokok doa"
-          };
           const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
           const reply = (statusCode, body) => ({
             statusCode,
@@ -178,14 +173,12 @@ Resources:
 
             const name = oneLine(data.name || "");
             const email = oneLine(data.email || "");
-            const subject = String(data.subject || "");
             const message = String(data.message || "").trim();
             const lang = /^(id|de|en)$/.test(data.lang) ? data.lang : "?";
 
             const valid =
               name.length >= 1 && name.length <= 100 &&
               EMAIL.test(email) && email.length <= 200 &&
-              Object.hasOwn(SUBJECTS, subject) &&
               message.length >= 10 && message.length <= 5000 &&
               data.consent === true;
             if (!valid) return reply(400, { ok: false, error: "invalid" });
@@ -193,7 +186,6 @@ Resources:
             const text = [
               `Name:    ${name}`,
               `E-Mail:  ${email}`,
-              `Subject: ${SUBJECTS[subject]}`,
               `Lang:    ${lang}`,
               "",
               message,
@@ -210,7 +202,7 @@ Resources:
                 ReplyToAddresses: [email],
                 Content: {
                   Simple: {
-                    Subject: { Data: `[Website] ${SUBJECTS[subject]} \u2013 ${name}`, Charset: "UTF-8" },
+                    Subject: { Data: `[Website] Contact form \u2013 ${name}`, Charset: "UTF-8" },
                     Body: { Text: { Data: text, Charset: "UTF-8" } }
                   }
                 }

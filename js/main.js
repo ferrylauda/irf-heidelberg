@@ -237,7 +237,6 @@
       body: JSON.stringify({
         name: form.elements.name.value.trim(),
         email: form.elements.email.value.trim(),
-        subject: form.elements.subject.value,
         message: form.elements.message.value.trim(),
         consent: form.elements.consent.checked,
         website: form.elements.website.value, // honeypot, normally empty
@@ -254,7 +253,6 @@
       case "email":
         if (!value) return "contact.errorEmail";
         return EMAIL_PATTERN.test(value) ? "" : "contact.errorEmailInvalid";
-      case "subject": return value ? "" : "contact.errorSubject";
       case "message": return value.length >= 10 ? "" : "contact.errorMessage";
       case "consent": return value ? "" : "contact.errorConsent";
       default: return "";
@@ -281,7 +279,6 @@
     var summary = document.getElementById("form-error-summary");
     var status = document.getElementById("form-status");
     var submitButton = form.querySelector("button[type=submit]");
-    var prayerHint = document.getElementById("prayer-hint");
     var submitted = false;
     var sending = false;
 
@@ -301,11 +298,6 @@
         if (submitted) showFieldError(field, validateField(field));
         status.hidden = true;
       });
-    });
-
-    // Extra confidentiality note for prayer requests
-    form.elements.subject.addEventListener("change", function (e) {
-      prayerHint.hidden = e.target.value !== "prayer";
     });
 
     form.addEventListener("submit", function (event) {
@@ -338,7 +330,6 @@
         if (state === "sent") {
           form.reset();
           submitted = false;
-          prayerHint.hidden = true;
         }
         showStatus(state); // on "failed" the entries are kept so people can retry
       });

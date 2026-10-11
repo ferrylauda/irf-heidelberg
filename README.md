@@ -32,8 +32,7 @@ Then open http://localhost:8000. Add `?lang=de` or `?lang=id` to force a languag
 
 Search for `TODO` in the HTML files:
 
-- Service time (`index.html`, currently 10:30) and service language
-- Sunday School time and prayer meeting day/time (`index.html` + `js/i18n.js`, currently "Sundays · 14:00")
+- Service language (service time is set to 15:30)
 - Address and map coordinates (`index.html`, location section + map links)
 - Contact email (`info@irf-heidelberg.org`)
 - WhatsApp contact (Hendry): commented out in the contact section until the number is known

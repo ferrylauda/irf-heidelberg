@@ -41,7 +41,7 @@ window.I18N = {
 
     "worship.eyebrow": "Activities",
     "worship.title": "Sunday Service",
-    "worship.intro": "Every Sunday we gather for worship. On the same day we also have Sunday School for children and a prayer meeting.",
+    "worship.intro": "Every Sunday we gather for worship. On the same day we also have a prayer meeting before the service.",
     "worship.dayLabel": "When",
     "worship.dayValue": "Every Sunday",
     "worship.timeLabel": "Time",
@@ -55,7 +55,7 @@ window.I18N = {
     "worship.schoolMeta": "For children under 12",
     "worship.schoolText": "During the service, children under 12 learn the stories and truths of the Bible in classes suited to their age.",
     "worship.prayerTitle": "Prayer Meeting",
-    "worship.prayerMeta": "Sundays · 14:00",
+    "worship.prayerMeta": "Sundays · 15:00",
     "worship.prayerText": "We come together before the throne of grace to pray for one another, for the church and for the world.",
 
     "gallery.eyebrow": "Gallery",
@@ -160,7 +160,7 @@ window.I18N = {
 
     "worship.eyebrow": "Kegiatan",
     "worship.title": "Ibadah Minggu",
-    "worship.intro": "Setiap hari Minggu kami berkumpul untuk beribadah. Pada hari yang sama juga ada Sekolah Minggu untuk anak-anak dan persekutuan doa.",
+    "worship.intro": "Setiap hari Minggu kami berkumpul untuk beribadah. Pada hari yang sama, sebelum ibadah, juga ada persekutuan doa.",
     "worship.dayLabel": "Hari",
     "worship.dayValue": "Setiap Minggu",
     "worship.timeLabel": "Waktu",
@@ -174,7 +174,7 @@ window.I18N = {
     "worship.schoolMeta": "Untuk anak di bawah 12 tahun",
     "worship.schoolText": "Selama ibadah berlangsung, anak-anak di bawah 12 tahun belajar kisah dan kebenaran Alkitab dalam kelas yang sesuai dengan usia mereka.",
     "worship.prayerTitle": "Persekutuan Doa",
-    "worship.prayerMeta": "Hari Minggu · 14.00",
+    "worship.prayerMeta": "Hari Minggu · 15.00",
     "worship.prayerText": "Kami datang bersama-sama ke hadapan takhta kasih karunia untuk saling mendoakan, mendoakan gereja, dan mendoakan dunia.",
 
     "gallery.eyebrow": "Galeri",
@@ -279,7 +279,7 @@ window.I18N = {
 
     "worship.eyebrow": "Aktivitäten",
     "worship.title": "Sonntagsgottesdienst",
-    "worship.intro": "Jeden Sonntag kommen wir zum Gottesdienst zusammen. Am selben Tag gibt es außerdem eine Sonntagsschule für Kinder und eine Gebetsstunde.",
+    "worship.intro": "Jeden Sonntag kommen wir zum Gottesdienst zusammen. Am selben Tag gibt es vor dem Gottesdienst außerdem eine Gebetsstunde.",
     "worship.dayLabel": "Wann",
     "worship.dayValue": "Jeden Sonntag",
     "worship.timeLabel": "Uhrzeit",
@@ -293,7 +293,7 @@ window.I18N = {
     "worship.schoolMeta": "Für Kinder unter 12 Jahren",
     "worship.schoolText": "Während des Gottesdienstes lernen Kinder unter 12 Jahren in altersgerechten Gruppen die Geschichten und Wahrheiten der Bibel kennen.",
     "worship.prayerTitle": "Gebetsstunde",
-    "worship.prayerMeta": "Sonntags · 14:00 Uhr",
+    "worship.prayerMeta": "Sonntags · 15:00 Uhr",
     "worship.prayerText": "Wir treten gemeinsam vor den Thron der Gnade und beten füreinander, für die Gemeinde und für die Welt.",
 
     "gallery.eyebrow": "Galerie",

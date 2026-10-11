@@ -239,6 +239,7 @@ h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.2; marg
 .service-facts .icon { grid-row: span 2; color: var(--gold); margin-top: 2px; }
 .service-facts dt { font-size: .74rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
 .service-facts dd { margin: 0; font-family: var(--serif); font-size: 1.3rem; color: var(--navy-deep); }
+.service-facts .fact-note { display: block; margin-top: 2px; font-family: var(--sans); font-size: .82rem; color: var(--muted); }
 .service-expect { background: var(--navy); color: #e9edf2; padding: 44px; }
 .service-expect h3 { color: #fff; font-size: 1.5rem; }
 .service-expect p { margin: 0; opacity: .9; }

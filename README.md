@@ -32,7 +32,7 @@ Then open http://localhost:8000. Add `?lang=de` or `?lang=id` to force a languag
 
 Search for `TODO` in the HTML files:
 
-- Service language (service time is set to 15:30)
+- (Service time and language are set)
 - Address and map coordinates (`index.html`, location section + map links)
 - Contact email (`info@irf-heidelberg.org`)
 - WhatsApp contact (Hendry): commented out in the contact section until the number is known

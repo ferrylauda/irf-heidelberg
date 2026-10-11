@@ -264,22 +264,20 @@
       <div class="container">
         <div class="location-grid">
           <div class="location-info">
-            <h3 data-i18n="location.addressLabel">Address</h3>
-            <!-- TODO: replace with the real address (also update the map links below) -->
+            <h3 data-i18n="location.addressLabel">Town</h3>
             <address>
-              Musterstraße 1<br>
-              69117 Heidelberg<br>
+              68535 Edingen-Neckarhausen<br>
               <span data-i18n="location.country">Germany</span>
             </address>
-            <h3 data-i18n="location.transportLabel">Getting here</h3>
-            <p data-i18n="location.transportText">Easily reachable by tram and bus from Heidelberg Hauptbahnhof and Bismarckplatz.</p>
+            <h3 data-i18n="location.exactLabel">Exact address</h3>
+            <p data-i18n="location.exactText">Our services take place in a private home, so we only show the town here. Please contact us and we will gladly share the exact address with you.</p>
             <div class="map-links">
-              <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Heidelberg%20Altstadt" data-i18n="location.googleMaps">Open in Google Maps</a>
-              <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat=49.4094&amp;mlon=8.6942#map=16/49.4094/8.6942">OpenStreetMap</a>
+              <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=68535%20Edingen-Neckarhausen" data-i18n="location.googleMaps">Open in Google Maps</a>
+              <a class="btn btn-outline" target="_blank" rel="noopener" href="https://www.openstreetmap.org/?mlat=49.4650&amp;mlon=8.5950#map=14/49.4650/8.5950">OpenStreetMap</a>
             </div>
           </div>
-          <!-- Map is loaded only on click (GDPR friendly). TODO: set the coordinates in data-src -->
-          <div class="map-frame" data-src="https://www.openstreetmap.org/export/embed.html?bbox=8.6862%2C49.4054%2C8.7022%2C49.4134&amp;layer=mapnik&amp;marker=49.4094%2C8.6942">
+          <!-- Map is loaded only on click (GDPR friendly). -->
+          <div class="map-frame" data-src="https://www.openstreetmap.org/export/embed.html?bbox=8.5650%2C49.4500%2C8.6250%2C49.4800&amp;layer=mapnik">
             <div class="map-consent">
               <svg class="icon icon-lg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
               <button type="button" class="btn btn-gold map-load" data-i18n="location.showMap">Show map</button>

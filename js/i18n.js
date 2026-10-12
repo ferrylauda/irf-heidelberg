@@ -130,9 +130,10 @@ window.I18N = {
     "contact.demoText": "Your entries are fine, but the form is not yet connected to email delivery. No message was sent.",
     "contact.whatsapp": "WhatsApp",
 
-    "footer.legal": "Privacy Policy",
+    "footer.legal": "Imprint & Privacy",
 
-    "legal.title": "Privacy Policy",
+    "legal.title": "Imprint & Privacy",
+    "legal.represented": "Represented by:",
     "legal.imprintTitle": "Imprint",
     "legal.imprintIntro": "Information pursuant to § 5 DDG (German Digital Services Act):",
     "legal.privacyTitle": "Privacy Policy",
@@ -270,9 +271,10 @@ window.I18N = {
     "contact.demoText": "Isian Anda sudah benar, tetapi formulir ini belum terhubung ke layanan email. Tidak ada pesan yang dikirim.",
     "contact.whatsapp": "WhatsApp",
 
-    "footer.legal": "Kebijakan Privasi",
+    "footer.legal": "Impresum & Privasi",
 
-    "legal.title": "Kebijakan Privasi",
+    "legal.title": "Impresum & Privasi",
+    "legal.represented": "Diwakili oleh:",
     "legal.imprintTitle": "Impresum",
     "legal.imprintIntro": "Informasi sesuai § 5 DDG (Undang-Undang Layanan Digital Jerman):",
     "legal.privacyTitle": "Kebijakan Privasi",
@@ -410,9 +412,10 @@ window.I18N = {
     "contact.demoText": "Ihre Eingaben sind in Ordnung, aber das Formular ist noch nicht mit dem E-Mail-Versand verbunden. Es wurde keine Nachricht gesendet.",
     "contact.whatsapp": "WhatsApp",
 
-    "footer.legal": "Datenschutzerklärung",
+    "footer.legal": "Impressum & Datenschutz",
 
-    "legal.title": "Datenschutzerklärung",
+    "legal.title": "Impressum & Datenschutz",
+    "legal.represented": "Vertreten durch:",
     "legal.imprintTitle": "Impressum",
     "legal.imprintIntro": "Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz):",
     "legal.privacyTitle": "Datenschutzerklärung",

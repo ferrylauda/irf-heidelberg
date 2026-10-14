@@ -133,7 +133,10 @@ window.I18N = {
     "footer.legal": "Imprint & Privacy",
 
     "legal.title": "Imprint & Privacy",
+    "legal.subentity": "IRF Heidelberg is not a registered association and not a legal entity of its own. It is a local fellowship and an offer of:",
     "legal.represented": "Represented by:",
+    "legal.contactLabel": "Contact:",
+    "legal.contactText": "via the contact form on our homepage",
     "legal.imprintTitle": "Imprint",
     "legal.imprintIntro": "Information pursuant to § 5 DDG (German Digital Services Act):",
     "legal.privacyTitle": "Privacy Policy",
@@ -274,7 +277,10 @@ window.I18N = {
     "footer.legal": "Impresum & Privasi",
 
     "legal.title": "Impresum & Privasi",
+    "legal.subentity": "IRF Heidelberg bukan perkumpulan terdaftar dan bukan badan hukum tersendiri. IRF Heidelberg adalah persekutuan lokal dan layanan dari:",
     "legal.represented": "Diwakili oleh:",
+    "legal.contactLabel": "Kontak:",
+    "legal.contactText": "melalui formulir kontak di beranda kami",
     "legal.imprintTitle": "Impresum",
     "legal.imprintIntro": "Informasi sesuai § 5 DDG (Undang-Undang Layanan Digital Jerman):",
     "legal.privacyTitle": "Kebijakan Privasi",
@@ -415,7 +421,10 @@ window.I18N = {
     "footer.legal": "Impressum & Datenschutz",
 
     "legal.title": "Impressum & Datenschutz",
+    "legal.subentity": "IRF Heidelberg ist kein eingetragener Verein und keine eigene Rechtsperson. Es ist eine örtliche Gemeinschaft und ein Angebot von:",
     "legal.represented": "Vertreten durch:",
+    "legal.contactLabel": "Kontakt:",
+    "legal.contactText": "über das Kontaktformular auf unserer Startseite",
     "legal.imprintTitle": "Impressum",
     "legal.imprintIntro": "Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz):",
     "legal.privacyTitle": "Datenschutzerklärung",

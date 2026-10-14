@@ -134,6 +134,8 @@ window.I18N = {
 
     "legal.title": "Imprint & Privacy",
     "legal.subentity": "IRF Heidelberg is not a registered association and not a legal entity of its own. It is a local fellowship and an offer of:",
+    "contact.whatsappLink": "Write to us on WhatsApp",
+    "contact.instagram": "Follow us on Instagram",
     "legal.represented": "Represented by:",
     "legal.contactLabel": "Contact:",
     "legal.contactText": "via the contact form on our homepage",
@@ -278,6 +280,8 @@ window.I18N = {
 
     "legal.title": "Impresum & Privasi",
     "legal.subentity": "IRF Heidelberg bukan perkumpulan terdaftar dan bukan badan hukum tersendiri. IRF Heidelberg adalah persekutuan lokal dan layanan dari:",
+    "contact.whatsappLink": "Chat kami di WhatsApp",
+    "contact.instagram": "Ikuti kami di Instagram",
     "legal.represented": "Diwakili oleh:",
     "legal.contactLabel": "Kontak:",
     "legal.contactText": "melalui formulir kontak di beranda kami",
@@ -422,6 +426,8 @@ window.I18N = {
 
     "legal.title": "Impressum & Datenschutz",
     "legal.subentity": "IRF Heidelberg ist kein eingetragener Verein und keine eigene Rechtsperson. Es ist eine örtliche Gemeinschaft und ein Angebot von:",
+    "contact.whatsappLink": "Schreib uns auf WhatsApp",
+    "contact.instagram": "Folge uns auf Instagram",
     "legal.represented": "Vertreten durch:",
     "legal.contactLabel": "Kontakt:",
     "legal.contactText": "über das Kontaktformular auf unserer Startseite",

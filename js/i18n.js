@@ -133,7 +133,7 @@ window.I18N = {
     "footer.legal": "Imprint & Privacy",
 
     "legal.title": "Imprint & Privacy",
-    "legal.subentity": "An offering of:",
+    "legal.subentity": "IRF Heidelberg is a church plant and an offering of:",
     "contact.whatsappLink": "Write to us on WhatsApp",
     "contact.instagram": "Follow us on Instagram",
     "legal.represented": "Represented by:",
@@ -280,7 +280,7 @@ window.I18N = {
     "footer.legal": "Impresum & Privasi",
 
     "legal.title": "Impresum & Privasi",
-    "legal.subentity": "Pelayanan dari:",
+    "legal.subentity": "IRF Heidelberg adalah gereja cabang dan pelayanan dari:",
     "contact.whatsappLink": "Chat kami di WhatsApp",
     "contact.instagram": "Ikuti kami di Instagram",
     "legal.represented": "Diwakili oleh:",
